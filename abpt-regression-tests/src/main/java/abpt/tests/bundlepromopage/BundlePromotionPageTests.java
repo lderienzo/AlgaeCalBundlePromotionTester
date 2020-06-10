@@ -12,5 +12,13 @@ public class BundlePromotionPageTests extends BaseTest {
     public void loadBundlePromoPageTest() {
         BundlePromotionPage bundlePromotionPage = new BundlePromotionPage(getDriver());
         bundlePromotionPage.loadPage(BUNDLE_PROMO_PAGE_URL);
+
+        bundlePromotionPage.addThreeMonthSupplyBundleToCart();
+        bundlePromotionPage.goBackToPromotionPageFromShoppingCartPage();
+
+        bundlePromotionPage.addSixMonthSupplyBundleToCart();
+        bundlePromotionPage.goBackToPromotionPageFromShoppingCartPage();
+
+        bundlePromotionPage.addTwelveMonthSupplyBundleToCart();
     }
 }
