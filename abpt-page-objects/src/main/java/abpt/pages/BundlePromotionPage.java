@@ -1,4 +1,4 @@
-package abpt.bundlepromopage;
+package abpt.pages;
 
 import java.util.concurrent.TimeUnit;
 

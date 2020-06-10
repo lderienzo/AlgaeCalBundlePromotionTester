@@ -1,13 +1,11 @@
-package abpt.tests.bundlepromopage;
+package abpt.tests.pages;
 
 import static org.testng.AssertJUnit.assertEquals;
 
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import abpt.bundlepromopage.BundlePromotionPage;
+import abpt.pages.BundlePromotionPage;
 import abpt.framework.core.BaseTest;
 
 public class BundlePromotionPageTests extends BaseTest {
