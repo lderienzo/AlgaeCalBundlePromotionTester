@@ -10,7 +10,7 @@ import abpt.pages.BundlePromotionPage;
 import abpt.framework.core.BaseTest;
 import abpt.pages.ShoppingCartPage;
 
-public class BundlePromotionPageTests extends BaseTest {
+public class BundlePromotionPagesTests extends BaseTest {
     private BundlePromotionPage bundlePromotionPage;
     private ShoppingCartPage shoppingCartPage;
 
