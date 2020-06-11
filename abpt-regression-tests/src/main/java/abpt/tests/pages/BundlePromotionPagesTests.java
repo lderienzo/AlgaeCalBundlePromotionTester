@@ -2,8 +2,6 @@ package abpt.tests.pages;
 
 import static org.testng.AssertJUnit.assertEquals;
 
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import abpt.pages.BundlePromotionPage;
@@ -13,19 +11,9 @@ import abpt.pages.ShoppingCartPage;
 public class BundlePromotionPagesTests extends BaseTest {
     private BundlePromotionPage bundlePromotionPage;
     private ShoppingCartPage shoppingCartPage;
+    private int expectedQuantity;
+    private int expectedTotal;
 
-
-    @BeforeTest
-    public void setUp() {
-        // given
-        bundlePromotionPage = new BundlePromotionPage(getDriver());
-    }
-
-    @AfterTest
-    public void clearDb() {
-        shoppingCartPage = new ShoppingCartPage(getDriver());
-        shoppingCartPage.emptyCart();
-    }
 
     @Test
     public void whenNoBundlesAddedToCartThenCartContainsNoItemsAndTotalIs_0() {
@@ -51,8 +39,7 @@ public class BundlePromotionPagesTests extends BaseTest {
     @Test
     public void when_3_MonthBundleAddedToCart_thenCartContainsOneItemAndTotalIs_244() {
         // given
-        int expectedQuantity = 1;
-        int expectedTotal = 244;
+        setUpCartPageWithExpectedQuantityAndTotal(1, 244);
         // when
         bundlePromotionPage.addThreeMonthSupplyBundleToCart();
         shoppingCartPage = new ShoppingCartPage(getDriver());
@@ -60,13 +47,20 @@ public class BundlePromotionPagesTests extends BaseTest {
         int actualQuantityOfThreeMonthSupply = shoppingCartPage.getNumberOfThreeMonthBundlesInCart();
         assertEquals(expectedQuantity, actualQuantityOfThreeMonthSupply);
         assertExpectedTotalPresent(expectedTotal);
+        // cleanup
+        shoppingCartPage.emptyCart();
+    }
+
+    private void setUpCartPageWithExpectedQuantityAndTotal(int quantity, int total) {
+        expectedQuantity = quantity;
+        expectedTotal = total;
+        bundlePromotionPage = new BundlePromotionPage(getDriver());
     }
 
     @Test
     public void when_6_MonthBundleAddedToCart_thenCartContainsOneItemAndTotalIs_396() {
         // given
-        int expectedQuantity = 1;
-        int expectedTotal = 396;
+        setUpCartPageWithExpectedQuantityAndTotal(1, 396);
         // when
         bundlePromotionPage.addSixMonthSupplyBundleToCart();
         shoppingCartPage = new ShoppingCartPage(getDriver());
@@ -74,13 +68,14 @@ public class BundlePromotionPagesTests extends BaseTest {
         int quantityOfSixMonthSupply = shoppingCartPage.getNumberOfSixMonthBundlesInCart();
         assertEquals(expectedQuantity, quantityOfSixMonthSupply);
         assertExpectedTotalPresent(expectedTotal);
+        // cleanup
+        shoppingCartPage.emptyCart();
     }
 
     @Test
     public void when_12_MonthBundleAddedToCart_thenCartContainsOneItemAndTotalIs_768() {
         // given
-        int expectedQuantity = 1;
-        int expectedTotal = 768;
+        setUpCartPageWithExpectedQuantityAndTotal(1, 768);
         // when
         bundlePromotionPage.addTwelveMonthSupplyBundleToCart();
         shoppingCartPage = new ShoppingCartPage(getDriver());
@@ -88,13 +83,14 @@ public class BundlePromotionPagesTests extends BaseTest {
         int quantityOfTwelveMonthSupply = shoppingCartPage.getNumberOfTwelveMonthBundlesInCart();
         assertEquals(expectedQuantity, quantityOfTwelveMonthSupply);
         assertExpectedTotalPresent(expectedTotal);
+        // cleanup
+        shoppingCartPage.emptyCart();
     }
 
     @Test
     public void whenTwo_3_MonthBundlesAddedToCart_thenCartContainsTwoItemsAndTotalIs_488() {
         // given
-        int expectedQuantity = 2;
-        int expectedTotal = 488;
+        setUpCartPageWithExpectedQuantityAndTotal(2, 488);
         // when
         bundlePromotionPage.addThreeMonthSupplyBundleToCart();
         bundlePromotionPage.goBackToPromotionPageFromShoppingCartPage();
@@ -104,13 +100,14 @@ public class BundlePromotionPagesTests extends BaseTest {
         int quantityOfThreeMonthSupply = shoppingCartPage.getNumberOfThreeMonthBundlesInCart();
         assertEquals(expectedQuantity, quantityOfThreeMonthSupply);
         assertExpectedTotalPresent(expectedTotal);
+        // cleanup
+        shoppingCartPage.emptyCart();
     }
 
     @Test
     public void whenTwo_6_MonthBundlesAddedToCart_thenCartContainsTwoItemsAndTotalIs_792() {
         // given
-        int expectedQuantity = 2;
-        int expectedTotal = 792;
+        setUpCartPageWithExpectedQuantityAndTotal(2, 792);
         // when
         bundlePromotionPage.addSixMonthSupplyBundleToCart();
         bundlePromotionPage.goBackToPromotionPageFromShoppingCartPage();
@@ -120,13 +117,14 @@ public class BundlePromotionPagesTests extends BaseTest {
         int quantityOfSixMonthSupply = shoppingCartPage.getNumberOfSixMonthBundlesInCart();
         assertEquals(expectedQuantity, quantityOfSixMonthSupply);
         assertExpectedTotalPresent(expectedTotal);
+        // cleanup
+        shoppingCartPage.emptyCart();
     }
 
     @Test
     public void whenTwo_12_MonthBundlesAddedToCart_thenCartContainsTwoItemsAndTotalIs_1536() {
         // given
-        int expectedQuantity = 2;
-        int expectedTotal = 1536;
+        setUpCartPageWithExpectedQuantityAndTotal(2, 1536);
         // when
         bundlePromotionPage.addTwelveMonthSupplyBundleToCart();
         bundlePromotionPage.goBackToPromotionPageFromShoppingCartPage();
@@ -136,13 +134,14 @@ public class BundlePromotionPagesTests extends BaseTest {
         int quantityOfTwelveMonthSupply = shoppingCartPage.getNumberOfTwelveMonthBundlesInCart();
         assertEquals(expectedQuantity, quantityOfTwelveMonthSupply);
         assertExpectedTotalPresent(expectedTotal);
+        // cleanup
+        shoppingCartPage.emptyCart();
     }
 
     @Test
     public void when_3_MonthAnd_6_MonthBundleAddedToCart_thenCartContainsTwoItemsAndTotalIs_640() {
         // given
-        int expectedQuantity = 2;
-        int expectedTotal = 640;
+        setUpCartPageWithExpectedQuantityAndTotal(2, 640);
         // when
         bundlePromotionPage.addThreeMonthSupplyBundleToCart();
         bundlePromotionPage.goBackToPromotionPageFromShoppingCartPage();
@@ -154,13 +153,14 @@ public class BundlePromotionPagesTests extends BaseTest {
         int actualQuantity = quantityOfThreeMonthSupply + quantityOfSixMonthSupply;
         assertEquals(expectedQuantity, actualQuantity);
         assertExpectedTotalPresent(expectedTotal);
+        // cleanup
+        shoppingCartPage.emptyCart();
     }
 
     @Test
     public void when_3_MonthAnd_12_MonthBundleAddedToCart_thenCartContainsTwoItemsAndTotalIs_1012() {
         // given
-        int expectedQuantity = 2;
-        int expectedTotal = 1012;
+        setUpCartPageWithExpectedQuantityAndTotal(2, 1012);
         // when
         bundlePromotionPage.addThreeMonthSupplyBundleToCart();
         bundlePromotionPage.goBackToPromotionPageFromShoppingCartPage();
@@ -172,13 +172,14 @@ public class BundlePromotionPagesTests extends BaseTest {
         int actualQuantity = quantityOfThreeMonthSupply + quantityOfTwelveMonthSupply;
         assertEquals(expectedQuantity, actualQuantity);
         assertExpectedTotalPresent(expectedTotal);
+        // cleanup
+        shoppingCartPage.emptyCart();
     }
 
     @Test
     public void when_6_MonthAnd_12_MonthBundleAddedToCart_thenCartContainsTwoItemsAndTotalIs_1164() {
         // given
-        int expectedQuantity = 2;
-        int expectedTotal = 1164;
+        setUpCartPageWithExpectedQuantityAndTotal(2, 1164);
         // when
         bundlePromotionPage.addSixMonthSupplyBundleToCart();
         bundlePromotionPage.goBackToPromotionPageFromShoppingCartPage();
@@ -190,13 +191,14 @@ public class BundlePromotionPagesTests extends BaseTest {
         int actualQuantity = quantityOfSixMonthSupply + quantityOfTwelveMonthSupply;
         assertEquals(expectedQuantity, actualQuantity);
         assertExpectedTotalPresent(expectedTotal);
+        // cleanup
+        shoppingCartPage.emptyCart();
     }
 
     @Test
     public void whenOneOfEachBundleTypeAreAddedToCart_thenCartContainsThreeItemsAndTotalIs_1408() {
         // given
-        int expectedQuantity = 3;
-        int expectedTotal = 1408;
+        setUpCartPageWithExpectedQuantityAndTotal(3, 1408);
         // when
         bundlePromotionPage.addThreeMonthSupplyBundleToCart();
         bundlePromotionPage.goBackToPromotionPageFromShoppingCartPage();
@@ -211,5 +213,7 @@ public class BundlePromotionPagesTests extends BaseTest {
         int actualQuantity = quantityOfThreeMonthSupply + quantityOfSixMonthSupply + quantityOfTwelveMonthSupply;
         assertEquals(expectedQuantity, actualQuantity);
         assertExpectedTotalPresent(expectedTotal);
+        // cleanup
+        shoppingCartPage.emptyCart();
     }
 }
