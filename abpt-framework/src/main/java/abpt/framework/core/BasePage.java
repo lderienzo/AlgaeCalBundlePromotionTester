@@ -2,7 +2,6 @@ package abpt.framework.core;
 
 
 import java.util.Optional;
-import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -18,8 +17,8 @@ public class BasePage {
     private static final int TIMEOUT = 5;
     private static final int POLLING = 100;
 
-    protected WebDriver driver;
-    private WebDriverWait wait;
+    protected final WebDriver driver;
+    private final WebDriverWait wait;
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
@@ -43,23 +42,11 @@ public class BasePage {
         return opt;
     }
 
-    protected void pauseForSeconds(int secondsToPause) {
-        driver.manage().timeouts().implicitlyWait(secondsToPause, TimeUnit.SECONDS);
-    }
-
     protected final void waitForElementToAppearAndBeClickable(By locator) {
         wait.until(ExpectedConditions.elementToBeClickable(locator));
     }
 
     protected final void waitForElementToAppear(By locator) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-    }
-
-    protected final void waitForElementToDisappear(By locator) {
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
-    }
-
-    protected final void waitForTextToDisappear(By locator, String text) {
-        wait.until(ExpectedConditions.not(ExpectedConditions.textToBe(locator, text)));
     }
 }

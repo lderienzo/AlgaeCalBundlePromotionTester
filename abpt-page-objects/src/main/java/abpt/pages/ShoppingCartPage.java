@@ -21,12 +21,11 @@ public class ShoppingCartPage extends BasePage {
     public void emptyCart() {
         waitForElementToAppearAndBeClickable(By.id(EMPTY_CART_BUTTON_ID));
         Optional<WebElement> emptyCartOptional = findElementById(EMPTY_CART_BUTTON_ID);
-        if (emptyCartOptional.isPresent())
-            emptyCartOptional.get().click();
+        emptyCartOptional.ifPresent(WebElement::click);
     }
 
     public int getNumberOfThreeMonthBundlesInCart() {
-        return Integer.valueOf(getQuantityOfCartItemForMonthSupply("3"));
+        return Integer.parseInt(getQuantityOfCartItemForMonthSupply("3"));
     }
 
     private String getQuantityOfCartItemForMonthSupply(String monthSupply) {
@@ -38,19 +37,16 @@ public class ShoppingCartPage extends BasePage {
     }
 
     public int getNumberOfSixMonthBundlesInCart() {
-        return Integer.valueOf(getQuantityOfCartItemForMonthSupply("6"));
+        return Integer.parseInt(getQuantityOfCartItemForMonthSupply("6"));
     }
 
     public int getNumberOfTwelveMonthBundlesInCart() {
-        return Integer.valueOf(getQuantityOfCartItemForMonthSupply("12"));
+        return Integer.parseInt(getQuantityOfCartItemForMonthSupply("12"));
     }
 
     public int getCartTotal() {
         waitForElementToAppear(By.id(TOTAL_TD_ID));
         Optional<WebElement> tdContainingQuantityOptional = findElementById(TOTAL_TD_ID);
-        if (tdContainingQuantityOptional.isPresent())
-            return Integer.parseInt(tdContainingQuantityOptional.get().getText());
-        else
-            return 0;
+        return tdContainingQuantityOptional.map(webElement -> Integer.parseInt(webElement.getText())).orElse(0);
     }
 }
